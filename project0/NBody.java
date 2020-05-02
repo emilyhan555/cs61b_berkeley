@@ -54,7 +54,7 @@ public class NBody{
         StdDraw.clear();
         
         /** stamp the picture  */
-        StdDraw.picture(0,0, "C:/Users/emily/cs61b/cs61b_berkeley/project0/images/starfield.jpg");
+        StdDraw.picture(0,0, "images/starfield.jpg");
 
         /** show the drawing to the screen. */
         StdDraw.show();
@@ -85,7 +85,7 @@ public class NBody{
             }
 
             /** draw the background image. */
-            StdDraw.picture(0,0, "C:/Users/emily/cs61b/cs61b_berkeley/project0/images/starfield.jpg");
+            StdDraw.picture(0,0, "images/starfield.jpg");
 
             /** draw all of the bodies. */
             for(Body planet: Bodies){

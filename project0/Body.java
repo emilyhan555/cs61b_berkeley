@@ -125,7 +125,7 @@ public class Body {
 
 	/** create method to draw each one of the bodies in the Bodies array. */
 	public void draw(){
-		StdDraw.picture(this.xxPos, this.yyPos, "C:/Users/emily/cs61b/cs61b_berkeley/project0/images/"+this.imgFileName);
+		StdDraw.picture(this.xxPos, this.yyPos, this.imgFileName);
 	}
 
 }
