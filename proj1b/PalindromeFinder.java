@@ -2,7 +2,7 @@
 public class PalindromeFinder {
     public static void main(String[] args) {
         int minLength = 4;
-        In in = new In("C:/Users/emily/cs61b/cs61b_berkeley/library-sp19/data/words.txt");
+        In in = new In("library-sp19/data/words.txt");
         Palindrome palindrome = new Palindrome();
         OffByOne offbyone = new OffByOne();
         //OffByN offbyN = new OffByN(5);
