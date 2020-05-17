@@ -19,7 +19,7 @@ public class PalindromeFinder {
         /** Find all off-by-one palindromes of length 4 or more. */
         while (!in.isEmpty()) {
             String word = in.readString();
-            if (word.length() >= minLength && palindrome.isPalindrome(word, offbyN)){
+            if (word.length() >= minLength && palindrome.isPalindrome(word, offbyone)){
                 System.out.println(word);
             }
         }
