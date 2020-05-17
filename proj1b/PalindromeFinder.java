@@ -5,7 +5,7 @@ public class PalindromeFinder {
         In in = new In("C:/Users/emily/cs61b/cs61b_berkeley/library-sp19/data/words.txt");
         Palindrome palindrome = new Palindrome();
         OffByOne offbyone = new OffByOne();
-        OffByN offbyN = new OffByN(5);
+        //OffByN offbyN = new OffByN(5);
 
         /* Find all palindromes of length 4 or more.
         while (!in.isEmpty()) {
