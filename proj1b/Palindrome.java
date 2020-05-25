@@ -1,38 +1,35 @@
 public class Palindrome {
-    /** Given a String, wordToDeque return a Deque where
-     * the characters appear in the same order as in the string. */
     public Deque<Character> wordToDeque(String word){
-        char c;
-        Deque<Character> d = new LinkedListDeque();
+        Deque<Character> deque = new ArrayDeque<>();
         for (int i = 0; i < word.length(); i++){
-            c = word.charAt(i);
-            d.addLast(c);
+            char ithChar = word.charAt(i);
+            deque.addLast(ithChar);
         }
-        return d;
+        return deque;
     }
 
-    /** Return if string word is palindrome or not. */
     public boolean isPalindrome(String word){
-        Deque<Character> d = wordToDeque(word);
-        while (d.size()>1) {
-            if (d.removeFirst() == d.removeLast()) {
-                continue;
+        Deque<Character> d = this.wordToDeque(word);
+        while (d.size() > 1){
+            char l = d.removeLast();
+            char f = d.removeFirst();
+            if (l != f) {
+                return false;
             }
-            return false;
         }
         return true;
     }
 
-    /** Overload isPalindrome. */
+    /** Overloading isPalindrome method. */
     public boolean isPalindrome(String word, CharacterComparator cc){
-        Deque<Character> deque = wordToDeque(word);
-        while (deque.size() > 1) {
-            if (cc.equalChars(deque.removeFirst(), deque.removeLast())) {
-                continue;
+        Deque<Character> d = this.wordToDeque(word);
+        while(d.size() > 1){
+            char first = d.removeFirst();
+            char last = d.removeLast();
+            if (!cc.equalChars(first, last)){
+                return false;
             }
-            return false;
         }
         return true;
     }
-
 }

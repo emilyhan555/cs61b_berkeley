@@ -17,20 +17,20 @@ public class TestPalindrome {
     }
 
     @Test
-    public void testisPalindrome(){
-        assertFalse(palindrome.isPalindrome("cat"));
-        assertTrue(palindrome.isPalindrome("a"));
-        assertTrue(palindrome.isPalindrome("A"));
-        assertFalse(palindrome.isPalindrome("Aooa"));
+    public void testisPalindrome() {
         assertTrue(palindrome.isPalindrome("racecar"));
-        assertTrue(palindrome.isPalindrome("plannalp"));
-
-
-        /* testisPalindrome cc */
-        OffByOne cc = new OffByOne();
-        assertTrue(palindrome.isPalindrome("abcab", cc));
-        assertFalse(palindrome.isPalindrome("abeb", cc));
-        assertTrue(palindrome.isPalindrome("flake", cc));
-
+        assertTrue(palindrome.isPalindrome("a"));
+        assertTrue(palindrome.isPalindrome("noon"));
+        assertFalse(palindrome.isPalindrome("Aa"));
+        assertFalse(palindrome.isPalindrome("horse"));
+        assertFalse(palindrome.isPalindrome("aaaaab"));
     }
-}
+
+    @Test
+    public void testisPalindromeOffByOne(){
+        OffByOne offByOne = new OffByOne();
+        assertTrue(palindrome.isPalindrome("flake", offByOne));
+        assertTrue(palindrome.isPalindrome("abcab",offByOne));
+        assertFalse(palindrome.isPalindrome("noon", offByOne));
+    }
+}     //Uncomment this class once you've created your Palindrome class. */

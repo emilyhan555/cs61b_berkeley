@@ -1,14 +1,14 @@
 public class OffByN implements CharacterComparator {
-    public int NItem;
+    private int N;
 
-    /** Constructor: create objects whose equalChars method return true for characters that are off by N. */
-    public OffByN(int N){
-        NItem = N;
+    /** Create a constructor which takes an integer. */
+    public OffByN(int n){
+        N = n;
     }
 
-    /** If the given x & y off by NItem, then return true. */
+    @Override
     public boolean equalChars(char x, char y){
-        if (Math.abs(x-y) == NItem){
+        if (Math.abs(x-y) == N){
             return true;
         }
         return false;
