@@ -20,6 +20,16 @@ public class ArrayDeque<T>{
         size = other.size;
     }
 
+    /** Return the index of the first item in the array. */
+    public int plusOne(int index){
+        return (index+1) % items.length;
+    }
+
+    /** Return the index of the last item in the array. */
+    public int minusOne(int index){
+        return (index -1 + items.length) % items.length;
+    }
+
     /** Resize the array. */
     public void resize(int capacity){
         T[] resize = (T[]) new Object[capacity];
@@ -36,6 +46,16 @@ public class ArrayDeque<T>{
         }
     }
 
+    /** Upsize the deque. */
+    public  void upsize(){
+        resize(size * 2);
+    }
+
+    /** Downsize the deque. */
+    public void downSize(){
+        resize(items.length/2);
+    }
+
     /** change the index once add an item or delete an item. */
 
     /** Add an item of type T to the front of the deque. */
@@ -45,11 +65,7 @@ public class ArrayDeque<T>{
         }
 
         items[nextFirst] = item;
-        if (nextFirst == 0){
-            nextFirst = items.length -1;
-        }else{
-            nextFirst = nextFirst -1;
-        }
+        nextFirst = minusOne(nextFirst);
         size += 1;
     }
 
@@ -60,11 +76,7 @@ public class ArrayDeque<T>{
         }
 
         items[nextLast] = item;
-        if(nextLast == items.length-1){
-            nextLast = 0;
-        }else {
-            nextLast = nextLast + 1;
-        }
+        nextLast = plusOne(nextLast);
         size += 1;
     }
 
@@ -86,38 +98,9 @@ public class ArrayDeque<T>{
      *  Once all the items have been printed, print out a new line.
      */
     public void printDeque(){
-        if (nextLast-nextFirst==1) {
-            for (int i = nextLast; i < items.length; i++) {
-                System.out.print(items[i] + " ");
-            }
-            for (int i = 0; i < nextFirst+1; i++){
-                System.out.print(items[i] + " ");
-            }
-        } else if (nextFirst-nextLast== items.length -1) {
-            for (int i = 0; i < items.length; i++) {
-                System.out.print(items[i] + " ");
-            }
-        } else if (nextFirst - nextLast >= 1 || (nextFirst==nextLast && nextFirst!= 0 && nextFirst != items.length -1)) {
-            for (int i = nextFirst + 1; i < items.length; i++) {
-                System.out.print(items[i] + " ");
-            }
-            for (int i = 0; i < nextLast; i++) {
-                System.out.print(items[i] + " ");
-            }
-        } else if (nextLast - nextFirst > 1){
-            for (int i = nextFirst+1; i < nextLast; i++){
-                System.out.print(items[i] + " ");
-            }
-        } else if (nextFirst == nextLast) {
-            if (nextFirst == 0) {
-                for (int i = nextFirst + 1; i < items.length; i++) {
-                    System.out.print(items[i] + " ");
-                }
-            } else if (nextFirst == items.length-1) {
-                for (int i = 0; i < nextLast; i++) {
-                    System.out.print(items[i] + " ");
-                }
-            }
+        int first = plusOne(nextFirst);
+        for (int i = first; i != nextLast; i = plusOne(i)){
+            System.out.print(items[i] + " ");
         }
         System.out.println();
     }
@@ -127,35 +110,13 @@ public class ArrayDeque<T>{
      */
     public T removeFirst(){
         T remove;
-        T[] temp = (T[]) new Object[items.length - 1];
         if(size == 0){
             return null;
-        }else{
-            if(nextLast-nextFirst==1 && nextLast== items.length-1){
-                remove = items[nextFirst+1];
-                System.arraycopy(items, 0, temp, 0, nextFirst+1);
-                nextLast=0;
-            }else if (nextLast - nextFirst > 1 && nextFirst==0){
-                remove = items[nextFirst+1];
-                temp[0] = null;
-                System.arraycopy(items, nextFirst+2, temp, nextFirst+1, nextLast - (nextFirst+1)-1);
-                nextLast--;
-            }else if(nextFirst-nextLast== items.length-1){
-                remove = items[nextLast];
-                System.arraycopy(items, nextLast+1, temp, 0, items.length-1);
-                nextFirst--;
-            }else if(nextFirst== items.length-1 && nextFirst-nextLast!= items.length-1){
-                    remove = items[0];
-                    System.arraycopy(items, 1,temp,0, items.length-1);
-                    nextFirst--;
-                    nextLast--;
-            }else{
-                    remove = items[nextFirst+1];
-                    System.arraycopy(items, 0, temp, 0, nextFirst+1);
-                    System.arraycopy(items, nextFirst+2,temp,nextFirst+1, items.length-(nextFirst+1)-1);
-            }
         }
-        items = temp;
+        int firstIndex = plusOne(nextFirst);
+        remove = items[firstIndex];
+        nextFirst = firstIndex;
+        items[firstIndex] = null;
         size--;
         return remove;
     }
@@ -165,40 +126,13 @@ public class ArrayDeque<T>{
      */
     public T removeLast(){
         T remove;
-        T[] temp = (T[]) new Object[items.length - 1];
         if (size == 0){
             return null;
-        }else{
-            if(nextFirst==0 && nextLast==1){
-                remove = items[0];
-                System.arraycopy(items,1,temp,0,items.length-1);
-                nextFirst= items.length-1-1;
-                nextLast=0;
-            }else if(nextFirst==0 && nextLast>1){
-                remove = items[nextLast-1];
-                System.arraycopy(items,0, temp, 0,nextLast-1);
-                nextLast--;
-            }else if(nextLast==0 && nextFirst == items.length-1){
-                remove = items[items.length-1];
-                System.arraycopy(items, 0, temp, 0, items.length-1);
-                nextFirst--;
-            }else if(nextFirst==nextLast && nextFirst==0){
-                remove = items[items.length-1];
-                System.arraycopy(items,0,temp,0,items.length-1);
-            }else{
-                remove = items[nextLast - 1];
-                if(nextLast-nextFirst<=1 || nextLast<nextFirst){
-                    System.arraycopy(items, 0, temp, 0, nextLast - 1);
-                    System.arraycopy(items, nextLast, temp, nextLast - 1, items.length - nextLast);
-                }
-                else{
-                    System.arraycopy(items,0,temp,0,nextLast-1);
-                }
-                nextFirst--;
-                nextLast--;
-            }
         }
-        items = temp;
+        int lastIndex= minusOne(nextLast);
+        remove = items[lastIndex];
+        nextLast = lastIndex;
+        items[lastIndex] = null;
         size--;
         return remove;
     }
@@ -231,5 +165,4 @@ public class ArrayDeque<T>{
         //System.out.println(a.get(19));
         ArrayDeque copy = new ArrayDeque(a);
     }
-
 }
