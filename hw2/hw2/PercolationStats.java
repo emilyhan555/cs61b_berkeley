@@ -21,7 +21,8 @@ public class PercolationStats {
                 int col = StdRandom.uniform(0, N);
                 p.open(row, col);
             }
-            fraction = p.numberOfOpenSites() / (N * N);
+            int num = p.numberOfOpenSites();
+            fraction = (double) num / (N * N);
             f[i] = fraction;
         }
     }
