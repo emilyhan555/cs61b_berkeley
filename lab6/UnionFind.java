@@ -45,6 +45,12 @@ public class UnionFind {
     public void union(int v1, int v2) {
         int root1 = find(v1);
         int root2 = find(v2);
+        if (v1 == v2) {
+            return;
+        }
+        if (find(v1) == find(v2)) {
+            return;
+        }
         if (sizeOf(v1) == sizeOf(v2)) {
             array[root2] -= sizeOf(v1);
             array[root1] = root2;
@@ -54,7 +60,6 @@ public class UnionFind {
         } else if (sizeOf(v1) > sizeOf(v2)) {
             array[root1] -= sizeOf(v2);
             array[root2] = root1;
-
         }
     }
 
@@ -68,6 +73,7 @@ public class UnionFind {
         return root;
     }
 
+    /*
     public static void main(String[] args) {
         UnionFind uf = new UnionFind(10);
         uf.union(1,2);
@@ -86,4 +92,5 @@ public class UnionFind {
         System.out.println(uf.parent(5));
         uf.validate(10);
     }
+     */
 }
